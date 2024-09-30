@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:mini_project_five/data/global.dart';
 import 'package:mini_project_five/screens/afternoonScreen.dart';
 import 'package:mini_project_five/screens/morningScreen.dart';
 import 'package:mini_project_five/screens/newsAnnouncement.dart';
@@ -33,6 +34,7 @@ class _Map_PageState extends State<Map_Page> with WidgetsBindingObserver {
   bool _isDarkMode = false;
   LatLng? Bus_Location;
   LocationService _locationService = LocationService();
+  DateTime now = DateTime.now();
 
 
   @override
@@ -121,7 +123,7 @@ class _Map_PageState extends State<Map_Page> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    Widget displayPage = Afternoon_Screen(updateSelectedBox: updateSelectedBox);
+    Widget displayPage = now.hour > startAfternoonService ? Afternoon_Screen(updateSelectedBox: updateSelectedBox) : Morning_Screen(updateSelectedBox: updateSelectedBox);
 
     return Scaffold(
       body: currentLocation == null? LoadingScreen() : Stack(
